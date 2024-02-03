@@ -5,8 +5,6 @@ import openai
 from llama_index import SimpleDirectoryReader
 from llama_index import SummaryIndex
 from llama_index.readers import SimpleWebPageReader
-from IPython.display import Markdown, display
-import os
 
 st.set_page_config(page_title="Chat with AI Assistant, powered by LlamaIndex", page_icon="🦙", layout="centered", initial_sidebar_state="auto", menu_items=None)
 openai.api_key = st.secrets.openai_key
