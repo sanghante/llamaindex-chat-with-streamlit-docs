@@ -26,7 +26,7 @@ def load_data():
         # index = VectorStoreIndex.from_documents(docs, service_context=service_context)
         # return index
         loader = TrafilaturaWebReader()
-        urls=['https://www.carzato.com/', 'https://www.carzato.com/product', 'https://www.carzato.com/about', 'https://www.carzato.com/blog", "https://www.carzato.com/contact-us']
+        urls=['https://www.carzato.com/', 'https://www.carzato.com/product', 'https://www.carzato.com/about', 'https://www.carzato.com/blog', 'https://www.carzato.com/contact-us']
         documents = loader.load_data(urls)        
         service_context = ServiceContext.from_defaults(llm=OpenAI(model="gpt-3.5-turbo", temperature=0, system_prompt="You are an expert on Carzato. Keep your answers technical and based on facts - do not hallucinate features."))
         index = SummaryIndex.from_documents(documents, service_context=service_context)
