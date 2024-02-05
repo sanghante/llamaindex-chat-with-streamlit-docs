@@ -5,3 +5,4 @@ nltk
 pypdf
 html2text
 llama_hub
+trafilatura
