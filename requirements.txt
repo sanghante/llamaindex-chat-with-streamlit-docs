@@ -6,3 +6,4 @@ pypdf
 html2text
 llama_hub
 selenium
+chromedriver-autoinstaller
