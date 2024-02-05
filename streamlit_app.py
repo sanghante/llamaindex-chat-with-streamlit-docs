@@ -5,7 +5,7 @@ import openai
 from llama_index import SimpleDirectoryReader
 from llama_index import SummaryIndex
 from llama_index.readers import SimpleWebPageReader 
-from llama_hub.web.whole_site import WholeSiteReader
+from llama_hub.web.trafilatura_web import TrafilaturaWebReader
 
 st.set_page_config(page_title="Chat with AI Assistant, powered by LlamaIndex", page_icon="🦙", layout="centered", initial_sidebar_state="auto", menu_items=None)
 openai.api_key = st.secrets.openai_key
@@ -25,12 +25,9 @@ def load_data():
         # service_context = ServiceContext.from_defaults(llm=OpenAI(model="gpt-3.5-turbo", temperature=0.1, system_prompt="You are an expert on Moby Dick. Assume that all questions are related to the book Moby Dick by Herman Melvile. Keep your answers technical and based on facts – do not hallucinate features."))
         # index = VectorStoreIndex.from_documents(docs, service_context=service_context)
         # return index
-        scraper = WholeSiteReader(
-            prefix='https://www.carzato.com/', # Example prefix
-            max_depth=3
-        )
+        loader = TrafilaturaWebReader()
         urls=['https://www.carzato.com/', 'https://www.carzato.com/product', 'https://www.carzato.com/about', 'https://www.carzato.com/blog", "https://www.carzato.com/contact-us']
-        documents = scraper.load_data(base_url='https://www.carzato.com/')        
+        documents = loader.load_data(urls)        
         service_context = ServiceContext.from_defaults(llm=OpenAI(model="gpt-3.5-turbo", temperature=0, system_prompt="You are an expert on Carzato. Keep your answers technical and based on facts - do not hallucinate features."))
         index = SummaryIndex.from_documents(documents, service_context=service_context)
         return index
